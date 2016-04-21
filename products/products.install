@@ -1,0 +1,188 @@
+<?php
+
+function products_schema() {
+  $schema = array();
+  $schema['products'] = array(
+    'description' => 'The base table for products.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'To reference from other parts of the Project.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'title' => array(
+        'description' => 'This will store title of the product.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'description' => array(
+        'description' => 'This will store product description.',
+        'type' => 'varchar',
+        'length' => 500,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'sku' => array(
+        'description' => 'This will store product Sku information.',
+        'type' => 'varchar',
+        'length' => 40,
+        'not null' => TRUE,
+      ),
+      'price' => array(
+        'description' => 'To store price.',
+        'type' => 'numeric',
+        'not null' => TRUE,
+        'default' => 0,
+        'precision' => 7,
+        'scale' => 2,
+      ),
+      'status' => array(
+        'description' => 'to show the product status.',
+        'mysql_type' => 'enum(\'Active\',\'Inactive\')',
+        'not null' => TRUE,
+        'default' => 'Active',
+      ),
+    ),
+    'primary key' => array('id'),
+    'unique keys' => array(
+      'sku' => array('sku'),      
+    ),    
+  );
+  
+  $schema['pcolor'] = array(
+    'description' => 'Saves information about each products color.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Primary Key.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'pid' => array(
+        'description' => 'The id of the product',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'cid' => array(
+        'description' => 'Color Variant ID',
+        'type' => 'varchar',
+        'length' => 30,
+        'not null' => TRUE,
+      ),
+      'price' => array(
+        'description' => 'To store price.',
+        'type' => 'numeric',
+        'not null' => TRUE,
+        'default' => 0,
+        'precision' => 7,
+        'scale' => 2,
+      ),
+    ),
+    'foreign keys' => array(
+      'pcolor_foreign_key' => array(
+        'table' => 'products',
+        'columns' => array('pid' => 'id'),
+      ),
+    ),
+    'primary key' => array('id'),
+    'unique keys' => array(
+      'color_unique' => array('pid','cid'),      
+    ),
+  );
+  
+  $schema['psize'] = array(
+    'description' => 'Saves information about each products size.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Primary Key.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'pid' => array(
+        'description' => 'The id of the product',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'size' => array(
+        'description' => 'Size',
+        'type' => 'varchar',
+        'length' => 30,
+        'not null' => TRUE,
+      ),      
+      'price' => array(
+        'description' => 'To store size price.',
+        'type' => 'numeric',
+        'not null' => TRUE,
+        'default' => 0,
+        'precision' => 7,
+        'scale' => 2,
+      ),
+    ),
+    'primary key' => array('id'),
+    'unique keys' => array(
+      'size_unique' => array('pid','size'),      
+    ),
+    'foreign keys' => array(
+      'products' => array(
+        'table' => 'products',
+        'columns' => array('pid' => 'id'),
+      ),      
+    ),
+  );
+  
+  
+  $schema['pimages'] = array(
+    'description' => 'The base table for Images.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Primary Key.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'pid' => array(
+        'description' => 'To reference product id.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'cid' => array(
+        'description' => 'Color Variant ID',
+        'type' => 'varchar',
+        'length' => 30,
+        'not null' => TRUE,
+      ),
+      'url' => array(
+        'description' => 'This will store product image url.',
+        'type' => 'varchar',
+        'length' => 100,
+        'not null' => TRUE,
+        'default' => '',
+      ),      
+    ),
+    'primary key' => array('id'),
+    'unique keys' => array(
+      'images_unique' => array('pid','cid','url'),      
+    ),
+    'foreign keys' => array(
+      'products_key' => array(
+        'table' => 'products',
+        'columns' => array('pid' => 'id'),
+      ), 
+      'pcolor_key' => array(
+        'table' => 'pcolor',
+        'columns' => array('cid' => 'cid'),
+      ), 
+    ),   
+  );
+  return $schema;  
+}
+

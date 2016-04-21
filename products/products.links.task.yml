@@ -1,0 +1,4 @@
+products_list:
+  title: Products
+  route_name: products_list
+  base_route: system.admin_content

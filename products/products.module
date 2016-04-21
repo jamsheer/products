@@ -1,0 +1,51 @@
+<?php
+
+/**
+* Implements hook_menu()
+*/
+function products_array() {
+  return array(
+    'admin/content/products' => array(
+      'title' => 'Products submissions',
+      'route_name' => 'products_list',
+    ),
+    'admin/content/products/add' => array(
+      'title' => 'Products',
+      'route_name' => 'products_add',
+    ),
+    'admin/content/products/delete/%' => array(
+      'title' => 'Delete Products submission',
+      'route_name' => 'products_delete',
+    ),
+      'admin/content/products/edit/%' => array(
+      'title' => 'Edit Products submission',
+      'route_name' => 'products_edit',
+    ),
+    'admin/content/products/sizedelete/%' => array(
+      'title' => 'Delete Products Size',
+      'route_name' => 'size_delete',
+    ),
+    'admin/content/products/colordelete/%' => array(
+      'title' => 'Delete Products Color',
+      'route_name' => 'color_delete',
+    ),
+    'admin/content/products/imagedelete/%' => array(
+      'title' => 'Delete Products Images',
+      'route_name' => 'image_delete',
+    ),
+  );
+}
+
+/**
+ * Implements hook_permission()
+ */
+/*function products_permission() {
+  return array(
+    'manage products forms' => array(
+      'title' => t('Manage products form submissions'),
+    ),
+    'use products form' => array(
+      'title' => t('Use the products form'),
+    ),
+  );
+}*/

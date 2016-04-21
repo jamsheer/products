@@ -1,0 +1,54 @@
+products_list:
+  path: '/admin/content/products'
+  defaults:
+    _controller: '\Drupal\products\Controller\AdminController::content'
+  requirements:
+    _permission: 'manage products forms'
+
+products_add:
+  path: '/admin/content/products/add'
+  defaults:
+    _form: '\Drupal\products\AddForm'
+    _title: 'Create New Products'
+  requirements:
+    _permission: 'use products form'
+
+products_edit:
+  path: 'admin/content/products/edit/{id}'
+  defaults:
+    _form: '\Drupal\products\AddForm'
+    _title: 'Edit Products'
+  requirements:
+    _permission: 'use products form'
+
+products_delete:
+  path: '/admin/content/products/delete/{id}'
+  defaults:
+    _form: 'Drupal\products\DeleteForm'
+    _title: 'Delete Products'
+  requirements:
+    _permission: 'manage products forms'
+    
+size_delete:
+  path: '/admin/content/products/sizedelete/{id}'
+  defaults:
+    _form: 'Drupal\products\SizedeleteForm'
+    _title: 'Delete Size'
+  requirements:
+    _permission: 'manage products forms'
+    
+color_delete:
+  path: '/admin/content/products/colordelete/{id}'
+  defaults:
+    _form: 'Drupal\products\ColordeleteForm'
+    _title: 'Delete Color'
+  requirements:
+    _permission: 'manage products forms' 
+
+image_delete:
+  path: '/admin/content/products/imagedelete/{id}'
+  defaults:
+    _form: 'Drupal\products\ImagedeleteForm'
+    _title: 'Delete Image'
+  requirements:
+    _permission: 'manage products forms'      

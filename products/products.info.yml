@@ -1,0 +1,5 @@
+name: Products
+description: 'A Product catalogue management module.'
+type: module
+core: 8.x
+package: Products
